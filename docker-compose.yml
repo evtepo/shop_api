@@ -1,0 +1,19 @@
+version: '3.5'
+services:
+  shop_api:
+    container_name: shop_api
+    build: ./shop_api/
+    env_file:
+      - ./shop_api/config/.env.example
+    ports:
+      - "8000:8000"
+
+  shop_postgres:
+    image: postgres
+    container_name: shop_postgres
+    env_file:
+      - ./shop_api/config/.env.example
+    expose:
+      - "5432"
+    volumes:
+      - /shop_api/data:/var/lib/postgresql/data
